@@ -1,0 +1,23 @@
+---
+
+- name: (hp linux tools) update apt
+  apt:
+    update_cache: "{{ hplt_apt_cache_update }}"
+    cache_valid_time: "{{ hplt_apt_cache_valid_time }}"
+  changed_when: False
+  become: yes
+  when: hplt_apt_update | bool
+
+- name: (hp linux tools) install linux-headers
+  apt:
+    name: "{{ hplt_apt_headers_packages }}"
+    state: present
+  become: yes
+  when: hplt_apt_headers_install | bool
+
+- name: (hp linux tools) install build essentials
+  apt:
+    name: "{{ hplt_apt_build_packages }}"
+    state: present
+  become: yes
+  when: hplt_apt_build_install | bool

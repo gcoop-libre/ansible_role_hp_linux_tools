@@ -1,0 +1,53 @@
+---
+
+- name: (hp linux tools) verify directory is present
+  file:
+    mode: "{{ hplt_dir_mode }}"
+    owner: "{{ hplt_dir_owner }}"
+    path: "{{ hplt_dir }}"
+    state: directory
+  become: yes
+
+- name: (hp linux tools) download tarball if missing or checksum differs
+  get_url:
+    url: "{{ hplt_file_url }}"
+    dest: "{{ hplt_tmp }}/{{ hplt_file_name }}"
+    checksum: "{{ hplt_algorithm | lower }}:{{ hplt_file_checksum }}"
+    use_proxy: "{{ hplt_proxy_use }}"
+    timeout: "{{ hplt_download_timeout | default(300) }}"
+  environment: "{{ hplt_proxy_environment }}"
+  become: yes
+  when: hplt_file_get | bool
+
+- name: (hp linux tools) extract {{ hplt_file_name }}
+  unarchive:
+    src: "{{ hplt_tmp }}/{{ hplt_file_name }}"
+    dest: "{{ hplt_dir }}/"
+    owner: "{{ hplt_file_owner }}"
+    group: root
+    mode: "{{ hplt_file_mode }}"
+    remote_src: yes
+  become: yes
+  when: hplt_file_extract | bool
+
+- name: (hp linux tools) extract {{ hplt_hpuefi_name }}
+  unarchive:
+    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpuefi_name }}"
+    dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+    owner: "{{ hplt_file_owner }}"
+    group: root
+    mode: "{{ hplt_file_mode }}"
+    remote_src: yes
+  become: yes
+  when: hplt_file_extract | bool
+
+- name: (hp linux tools) extract {{ hplt_hpflash_name }}
+  unarchive:
+    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpflash_name }}"
+    dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+    owner: "{{ hplt_file_owner }}"
+    group: root
+    mode: "{{ hplt_file_mode }}"
+    remote_src: yes
+  become: yes
+  when: hplt_file_extract | bool

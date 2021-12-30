@@ -1,0 +1,12 @@
+---
+
+hplt_apt_build_install: True
+hplt_apt_build_packages:
+  - build-essential
+hplt_apt_cache_update: True
+hplt_apt_cache_valid_time: 3600
+hplt_apt_headers_install: true
+hplt_apt_headers_packages:
+  - "linux-headers-{{ ansible_facts.kernel }}"
+hplt_apt_tasks: True
+hplt_apt_update: True

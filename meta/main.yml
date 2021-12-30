@@ -1,0 +1,20 @@
+---
+
+galaxy_info:
+  author: Osiris Alejandro Gómez
+  description: Ansible role for install and execute HP Linux Tools
+  role_name: hp_linux_tools
+  company: gcoop Cooperativa de Software Libre
+  license: GPLv3
+  min_ansible_version: 2.9.15
+  platforms:
+    - name: ubuntu
+      versions:
+        - bionic
+  galaxy_tags:
+    - hp
+    - tools
+    - bios
+    - aspm
+    - repsetup
+dependencies: []

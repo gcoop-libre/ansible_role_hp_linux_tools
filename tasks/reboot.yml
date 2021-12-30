@@ -1,0 +1,23 @@
+---
+
+- name: (hp linux tools) reboot and wait come back online
+  reboot:
+    connect_timeout   : "{{ hplt_reboot_connect_timeout }}"
+    msg               : "{{ hplt_reboot_msg             }}"
+    post_reboot_delay : "{{ hplt_reboot_post_delay      }}"
+    pre_reboot_delay  : "{{ hplt_reboot_pre_delay       }}"
+    reboot_timeout    : "{{ hplt_reboot_timeout         }}"
+    test_command      : "{{ hplt_reboot_test_command    }}"
+  become: yes
+  when:
+    - hplt_reboot_and_wait | bool
+    - not hplt_reboot_no_wait | bool
+
+- name: (hp linux tools) reboot and no wait come back online
+  shell: "sleep {{ hplt_reboot_pre_delay }} && reboot"
+  async: "{{ hplt_reboot_async }}"
+  poll: "{{ hplt_reboot_poll }}"
+  become: yes
+  when:
+    - hplt_reboot_no_wait | bool
+    - not hplt_reboot_and_wait | bool

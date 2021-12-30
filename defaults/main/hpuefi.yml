@@ -1,0 +1,12 @@
+---
+
+hplt_hpuefi_dir: /lib/modules/{{ ansible_facts.kernel }}/kernel/drivers/hpuefi
+hplt_hpuefi_mkdev: True
+hplt_hpuefi_mkdev_bin: mkdevhpuefi
+hplt_hpuefi_mkdev_command: "{{ hplt_hpuefi_mkdev_path }}"
+hplt_hpuefi_mkdev_path: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hpuefi-mod-3.03/{{ hplt_hpuefi_mkdev_bin }}"
+hplt_hpuefi_mode: '0700'
+hplt_hpuefi_modprobe: True
+hplt_hpuefi_name: hpuefi-mod-3.03.tgz
+hplt_hpuefi_owner: root
+hplt_hpuefi_tasks: True

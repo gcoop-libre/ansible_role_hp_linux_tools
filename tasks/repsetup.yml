@@ -1,0 +1,42 @@
+---
+
+- name: (hp linux tools) BIOS download HPSETUP if missing or checksum differs
+  get_url:
+    url: "{{ hplt_repsetup_hpsetup_file_url }}"
+    dest: "{{ hplt_repsetup_hpsetup_file_path }}"
+    checksum: "{{ hplt_algorithm | lower }}:{{ hplt_repsetup_hpsetup_file_checksum }}"
+    use_proxy: "{{ hplt_proxy_use }}"
+    timeout: "{{ hplt_download_timeout | default(300) }}"
+  environment: "{{ hplt_proxy_environment }}"
+  become: yes
+  when:
+    - hplt_repsetup_hpsetup_down | bool
+    - not hplt_repsetup_hpsetup_get | bool
+
+- name: (hp linux tools) verify hp-repsetup is executable
+  file:
+    path: "{{ hplt_repsetup_command_bin }}"
+    owner: "{{ hplt_repsetup_owner }}"
+    mode: "{{ hplt_repsetup_mode }}"
+  become: yes
+
+- name: (hp linux tools) BIOS get HPSETUP
+  shell: "{{ hplt_repsetup_command_get }} > {{ hplt_repsetup_hpsetup_file_path }}"
+  args:
+    executable: /bin/bash
+  become: yes
+  when:
+    - hplt_repsetup_hpsetup_get | bool
+    - not hplt_repsetup_hpsetup_down | bool
+
+- name: (hp linux tools) BIOS show HPSETUP
+  command: strings {{ hplt_repsetup_hpsetup_file_path }}
+  become: yes
+  when: hplt_repsetup_hpsetup_show | bool
+
+- name: (hp linux tools) BIOS set HPSETUP
+  command: "{{ hplt_repsetup_command_set }} {{ hplt_repsetup_hpsetup_file_path }}"
+  ignore_errors: True
+  become: yes
+  when: hplt_repsetup_hpsetup_set | bool
+

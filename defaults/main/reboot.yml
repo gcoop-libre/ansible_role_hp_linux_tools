@@ -1,0 +1,13 @@
+---
+
+hplt_reboot_and_wait: False
+hplt_reboot_async: 1
+hplt_reboot_connect_timeout: 5
+hplt_reboot_msg: reboot
+hplt_reboot_no_wait: False
+hplt_reboot_poll: 0
+hplt_reboot_post_delay: 30
+hplt_reboot_pre_delay: 5
+hplt_reboot_tasks: True
+hplt_reboot_test_command: 'cat /sys/class/dmi/id/product_serial'
+hplt_reboot_timeout: 180

@@ -1,0 +1,7 @@
+---
+
+- name: hp linux tools
+  hosts: [all]
+
+  roles:
+    - gcoop-libre.hp_linux_tools
