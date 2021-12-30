@@ -1,0 +1,3 @@
+hplt_build_install: True
+hplt_build_make: True
+hplt_build_tasks: True

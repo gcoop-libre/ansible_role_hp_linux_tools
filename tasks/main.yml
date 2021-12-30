@@ -1,0 +1,35 @@
+---
+
+- name: (hp linux tools) include distribution variables
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: (hp linux tools) include release variables
+  include_vars: "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
+
+- name: (hp linux tools) include apt tasks
+  include_tasks: apt.yml
+  when: hplt_apt_tasks | bool
+
+- name: (hp linux tools) include file tasks
+  include_tasks: file.yml
+  when: hplt_file_tasks | bool
+
+- name: (hp linux tools) include build tasks
+  include_tasks: build.yml
+  when: hplt_build_tasks | bool
+
+- name: (hp linux tools) include hpuefi tasks
+  include_tasks: hpuefi.yml
+  when: hplt_hpuefi_tasks | bool
+
+- name: (hp linux tools) include repsetup tasks
+  include_tasks: repsetup.yml
+  when: hplt_repsetup_tasks | bool
+
+- name: (hp linux tools) include reboot tasks
+  include_tasks: reboot.yml
+  when: hplt_reboot_tasks | bool
+
+- name: (hp linux tools) include lspci tasks
+  include_tasks: lspci.yml
+  when: hplt_lspci_tasks | bool

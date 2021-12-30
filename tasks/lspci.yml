@@ -1,0 +1,14 @@
+---
+
+- name: (hp linux tools) get lspci information
+  command: lspci -vv -s {{ hplt_lspci_eth_device }}
+  register: hplt_lspci_eth_device_register
+  become: yes
+  when: hplt_lspci_eth_device_info
+
+- name: (hp linux tools) fail when {{ hplt_lspci_eth_status }} not found
+  fail:
+  when:
+    - hplt_lspci_eth_device_status | bool
+    - hplt_lspci_eth_status not in hplt_lspci_eth_device_register.stdout
+

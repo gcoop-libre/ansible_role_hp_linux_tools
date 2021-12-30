@@ -1,0 +1,5 @@
+parseable: true
+use_default_rules: true
+verbosity: 2
+skip_list:
+  - 305

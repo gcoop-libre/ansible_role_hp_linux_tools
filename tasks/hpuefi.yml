@@ -1,0 +1,46 @@
+---
+
+- name: (hp linux tools) verify hpuefi module is present
+  modprobe:
+    name: hpuefi
+    state: present
+  become: yes
+  when: hplt_hpuefi_modprobe | bool
+
+- name: (hp linux tools) verify mkdevhpuefi is executable
+  file:
+    path: "{{ hplt_hpuefi_mkdev_path }}"
+    owner: "{{ hplt_hpuefi_owner }}"
+    mode: "{{ hplt_hpuefi_mode }}"
+  become: yes
+  when: hplt_hpuefi_mkdev | bool
+
+- name: (hp linux tools) get /dev/hpuefi stat
+  stat:
+    path: /dev/hpuefi
+  register: hplt_hpuefi_dev
+  ignore_errors: True
+  become: yes
+  when: hplt_hpuefi_mkdev | bool
+
+- name: (hp linux tools) execute mkdevhpuefi
+  shell: "{{ hplt_hpuefi_mkdev_command }}"
+  args:
+    executable: /bin/bash
+  become: yes
+  when:
+    - hplt_hpuefi_mkdev | bool
+    - not hplt_hpuefi_dev.stat.exists | bool
+
+- name: (hp linux tools) get /dev/hpuefi stat
+  stat:
+    path: /dev/hpuefi
+  register: hplt_hpuefi_dev
+  become: yes
+  when: hplt_hpuefi_mkdev | bool
+
+- name: (hp linux tools) fail when /dev/hpuefi dont exists
+  fail:
+  when:
+    - hplt_hpuefi_mkdev | bool
+    - not hplt_hpuefi_dev.stat.exists | bool
