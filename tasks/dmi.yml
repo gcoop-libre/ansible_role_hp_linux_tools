@@ -1,0 +1,29 @@
+---
+
+- name: (hp linux tools) fail on invalid bios_date
+  fail:
+    msg: "bios_date: {{ ansible_facts['bios_date'] }} not in ({{ hplt_dmi_valid_product_bios_date | join(', ') }})"
+  when:
+    - hplt_dmi_product_bios_date | bool
+    - ansible_facts['bios_date'] not in hplt_dmi_valid_product_bios_date
+
+- name: (hp linux tools) fail on invalid bios_version
+  fail:
+    msg: "bios_version: {{ ansible_facts['bios_version'] }} not in ({{ hplt_dmi_valid_product_bios_version | join(', ') }})"
+  when:
+    - hplt_dmi_product_bios_version | bool
+    - ansible_facts['bios_version'] not in hplt_dmi_valid_product_bios_version
+
+- name: (hp linux tools) fail on invalid product_name
+  fail:
+    msg: "product_name: {{ ansible_facts['product_name'] }} not in ({{ hplt_dmi_valid_product_name | join(', ') }})"
+  when:
+    - hplt_dmi_product_name | bool
+    - ansible_facts['product_name'] not in hplt_dmi_valid_product_name
+
+- name: (hp linux tools) fail on invalid system_vendor
+  fail:
+    msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
+  when:
+    - hplt_dmi_system_vendor | bool
+    - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
