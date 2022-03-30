@@ -1,0 +1,15 @@
+---
+
+hplt_dmi_product_bios_date: true
+hplt_dmi_product_bios_version: true
+hplt_dmi_product_name: true
+hplt_dmi_system_vendor: true
+hplt_dmi_tasks: true
+hplt_dmi_valid_product_bios_date:
+  - 04/27/2020
+hplt_dmi_valid_product_bios_version:
+  - R23 Ver. 02.05.01
+hplt_dmi_valid_product_name:
+  - HP ProDesk 400 G5 Desktop Mini
+hplt_dmi_valid_system_vendor:
+  - HP
