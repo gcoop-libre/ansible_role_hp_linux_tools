@@ -21,3 +21,10 @@
     state: present
   become: yes
   when: hplt_apt_build_install | bool
+
+- name: (hp linux tools) install extra packages
+  apt:
+    name: "{{ hplt_apt_extra_packages }}"
+    state: present
+  become: yes
+  when: hplt_apt_extra_install | bool

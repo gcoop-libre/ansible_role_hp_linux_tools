@@ -6,6 +6,10 @@
 - name: (hp linux tools) include release variables
   include_vars: "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
 
+- name: (hp linux tools) include dmi tasks
+  include_tasks: dmi.yml
+  when: hplt_dmi_tasks | bool
+
 - name: (hp linux tools) include apt tasks
   include_tasks: apt.yml
   when: hplt_apt_tasks | bool
