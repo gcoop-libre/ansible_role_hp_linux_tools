@@ -31,12 +31,21 @@ ansible-syntax-check:
   tags:
     - ansible
 
-ansible-awx:
+ansible-awx-wst-hpt-bio:
   stage: ansible-awx
   script:
     - make awx_version
     - make awx_user
     - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_bio_v0.2.0 awx_job_launch
+  when: manual
+  tags:
+    - awx
+
+ansible-awx-wst-hpt-dmi:
+  stage: ansible-awx
+  script:
+    - make awx_version
+    - make awx_user
     - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_dmi_v0.1.0 awx_job_launch
   when: manual
   tags:
