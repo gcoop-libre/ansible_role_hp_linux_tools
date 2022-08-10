@@ -19,7 +19,7 @@ stages:
 ansible-lint:
   stage: ansible-lint
   script:
-    - make lint
+    - make PLAYBOOK=test.yml lint
   tags:
     - ansible
 
@@ -35,7 +35,7 @@ ansible-awx:
   script:
     - make awx_version
     - make awx_user
-    - make awx_job_launch
+    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_bio_v0.2.0 awx_job_launch
   when: manual
   tags:
     - awx
