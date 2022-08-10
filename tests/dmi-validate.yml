@@ -1,0 +1,38 @@
+---
+
+- name: Validate DMI (Desktop Management Interface)
+  hosts: [all]
+
+  tasks:
+
+    - name: (DMI) validate bios_date
+      fail:
+        msg: "bios_date: {{ ansible_facts['bios_date'] }} not in ({{ hplt_dmi_valid_product_bios_date | join(', ') }})"
+      ignore_errors: true
+      when:
+        - hplt_dmi_product_bios_date | bool
+        - ansible_facts['bios_date'] not in hplt_dmi_valid_product_bios_date
+
+    - name: (DMI) validate bios_version
+      fail:
+        msg: "bios_version: {{ ansible_facts['bios_version'] }} not in ({{ hplt_dmi_valid_product_bios_version | join(', ') }})"
+      ignore_errors: true
+      when:
+        - hplt_dmi_product_bios_version | bool
+        - ansible_facts['bios_version'] not in hplt_dmi_valid_product_bios_version
+
+    - name: (DMI) validate product_name
+      fail:
+        msg: "product_name: {{ ansible_facts['product_name'] }} not in ({{ hplt_dmi_valid_product_name | join(', ') }})"
+      ignore_errors: true
+      when:
+        - hplt_dmi_product_name | bool
+        - ansible_facts['product_name'] not in hplt_dmi_valid_product_name
+
+    - name: (DMI) validate system_vendor
+      fail:
+        msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
+      ignore_errors: true
+      when:
+        - hplt_dmi_system_vendor | bool
+        - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
