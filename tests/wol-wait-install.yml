@@ -9,7 +9,7 @@
 
   pre_tasks:
 
-    - name: (hp linux tools) Wake host {{ inventory_hostname }} via WoL {{ primary_macaddress }}
+    - name: (hp linux tools) Wake host via WoL
       wakeonlan:
         mac: "{{ primary_macaddress | default(macaddress) }}"
         port: "{{ hplt_wol_port | default(9) }}"
@@ -19,7 +19,7 @@
         - hplt_wol is defined
         - hplt_wol | bool
 
-    - name: (hp linux tools) Waiting for host {{ inventory_hostname }} to come back online
+    - name: (hp linux tools) Waiting for host to come back online
       wait_for:
         connect_timeout: "{{ hplt_wait_timeout_net | default(5) }}"
         host: "{{ ansible_host }}"
@@ -34,13 +34,13 @@
         - ansible_host is defined
         - ansible_host | length > 0
 
-    - name: (hp linux tools) get hardware facts for host {{ inventory_hostname }}
+    - name: (hp linux tools) get hardware facts
       setup:
         gather_subset: hardware
 
-    - name: (hp linux tools) end play on invalid system_vendor for host {{ inventory_hostname }}
+    - name: (hp linux tools) end play on invalid system_vendor
       block:
-        - name: (hp linux tools) debug system vendor for host {{ inventory_hostname }}
+        - name: (hp linux tools) debug system vendor
           debug:
             msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
         - meta: end_host
@@ -48,7 +48,7 @@
         - hplt_dmi_system_vendor | bool
         - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
 
-    - name: (hp linux tools) get all facts for host {{ inventory_hostname }}
+    - name: (hp linux tools) get all facts
       setup:
         gather_subset: all
 
