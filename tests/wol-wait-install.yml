@@ -5,6 +5,7 @@
   strategy: "{{ hplt_deploy_strategy | default('free') }}"
   serial: "{{ hplt_deploy_serial | default('1') }}"
   become: "{{ hplt_deploy_become | default(true) }}"
+  gather_facts: no
 
   pre_tasks:
 
