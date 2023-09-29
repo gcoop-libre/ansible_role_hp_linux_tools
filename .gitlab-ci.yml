@@ -21,6 +21,7 @@ ansible-lint:
   script:
     - make PLAYBOOK=test.yml lint
     - make PLAYBOOK=dmi-validate.yml lint
+    - make PLAYBOOK=wol-wait-install.yml lint
   tags:
     - ansible
 
