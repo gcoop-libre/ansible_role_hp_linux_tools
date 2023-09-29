@@ -34,9 +34,12 @@
         - ansible_host is defined
         - ansible_host | length > 0
 
-    - name: (hp linux tools) end play on invalid system_vendor
+    - name: (hp linux tools) end play on invalid system_vendor for host {{ inventory_hostname }}
       block:
-        - name: (hp linux tools) debug system vendor
+        - name: (hp linux tools) get hardware facts for host {{ inventory_hostname }}
+          setup:
+            gather_subset: hardware
+        - name: (hp linux tools) debug system vendor for host {{ inventory_hostname }}
           debug:
             msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
         - meta: end_host
