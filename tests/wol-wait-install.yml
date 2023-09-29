@@ -47,5 +47,9 @@
         - hplt_dmi_system_vendor | bool
         - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
 
+    - name: (hp linux tools) get all facts for host {{ inventory_hostname }}
+      setup:
+        gather_subset: all
+
   roles:
     - gcoop-libre.hp_linux_tools
