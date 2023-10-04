@@ -4,7 +4,10 @@
   command: lspci -vv -s {{ hplt_lspci_eth_device }}
   register: hplt_lspci_eth_device_register
   become: yes
-  when: hplt_lspci_eth_device_info
+  when:
+    - hplt_lspci_eth_device_info is defined
+    - hplt_lspci_eth_device_info | bool
+    - hplt_lspci_eth_device is defined
 
 - name: (hp linux tools) fail when {{ hplt_lspci_eth_status }} not found
   fail:
