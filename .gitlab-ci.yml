@@ -23,6 +23,7 @@ ansible-lint:
     - make PLAYBOOK=dmi-validate.yml lint
     - make PLAYBOOK=wol-wait-install.yml lint
     - make PLAYBOOK=wol-wait-lspci.yml lint
+    - make PLAYBOOK=wol-wait-system-info.yml lint
   tags:
     - ansible
 
