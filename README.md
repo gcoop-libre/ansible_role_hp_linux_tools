@@ -4,6 +4,17 @@ This role, download, build, install a _HP Linux Tools_ (`hpuefi-mod`
 kernel module) and execute `hp-repsetup` to get and set _BIOS_
 configuration from file (`HPSETUP.TXT`).
 
+## Tag Summay
+
+| _date_     | _tag_      | _description_                                                                                                                                                                                                           |
+|------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2023-10-06 | `  v0.2.3` | add wol-wait-lspci playbook for WakeOnLAN, wait for SSH and verify lspci output, add wol-wait-system-info playbook for WakeOnLAN, wait for SSH and get and show System Info, improve README, ansible-lint and gitlab-ci |
+| 2023-09-29 | `  v0.2.2` | add wol-wait-install playbook for WakeOnLAN, wait for SSH and install HP Linux Tools only when match with system_vendor                                                                                                 |
+| 2022-08-10 | `  v0.2.1` | add dmi-validate playbook for test and ignore fail on invalid (bios_date|bios_version|product_name|system_vendor)                                                                                                       |
+| 2022-03-30 | `  v0.2.0` | Release v0.2.0                                                                                                                                                                                                          |
+| 2022-03-17 | `  v0.1.1` | add symbolic link to role in tests                                                                                                                                                                                      |
+| 2021-12-30 | `  v0.1.0` | first version tested in Ubuntu Bionic                                                                                                                                                                                   |
+
 ## Requirements
 
 None.
