@@ -45,7 +45,9 @@
             msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
         - meta: end_host
       when:
+        - hplt_dmi_system_vendor is defined
         - hplt_dmi_system_vendor | bool
+        - hplt_dmi_valid_system_vendor is defined
         - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
 
     - name: (hp linux tools) include lspci tasks
