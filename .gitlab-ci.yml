@@ -22,6 +22,8 @@ ansible-lint:
     - make PLAYBOOK=test.yml lint
     - make PLAYBOOK=dmi-validate.yml lint
     - make PLAYBOOK=wol-wait-install.yml lint
+    - make PLAYBOOK=wol-wait-lspci.yml lint
+    - make PLAYBOOK=wol-wait-system-info.yml lint
   tags:
     - ansible
 
@@ -37,7 +39,7 @@ ansible-awx-wst-hpt-bio:
   script:
     - make awx_version
     - make awx_user
-    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_bio_v0.2.2 awx_job_launch
+    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_bio_v0.2.3 awx_job_launch
   when: manual
   tags:
     - awx
@@ -48,6 +50,26 @@ ansible-awx-wst-hpt-dmi:
     - make awx_version
     - make awx_user
     - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_dmi_v0.1.0 awx_job_launch
+  when: manual
+  tags:
+    - awx
+
+ansible-awx-wst-hpt-pci:
+  stage: ansible-awx
+  script:
+    - make awx_version
+    - make awx_user
+    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_pci_v0.2.3 awx_job_launch
+  when: manual
+  tags:
+    - awx
+
+ansible-awx-wst-hpt-sys:
+  stage: ansible-awx
+  script:
+    - make awx_version
+    - make awx_user
+    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_sys_v0.2.3 awx_job_launch
   when: manual
   tags:
     - awx
