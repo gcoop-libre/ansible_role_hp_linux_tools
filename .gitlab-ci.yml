@@ -63,3 +63,13 @@ ansible-awx-wst-hpt-pci:
   when: manual
   tags:
     - awx
+
+ansible-awx-wst-hpt-sys:
+  stage: ansible-awx
+  script:
+    - make awx_version
+    - make awx_user
+    - make AWX_GITLAB_JOB_LAUNCH=wst_hpt_sys_v0.2.3 awx_job_launch
+  when: manual
+  tags:
+    - awx
