@@ -1,6 +1,6 @@
 ---
 
-- name: hp linux tools
+- name: Install HP Linux Tools
   hosts: [all]
 
   roles:
