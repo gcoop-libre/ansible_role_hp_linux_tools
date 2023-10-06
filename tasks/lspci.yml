@@ -15,5 +15,5 @@
     - hplt_lspci_eth_device_status is defined
     - hplt_lspci_eth_device_status | bool
     - hplt_lspci_eth_status is defined
+    - hplt_lspci_eth_device_register is defined
     - hplt_lspci_eth_status not in hplt_lspci_eth_device_register.stdout
-
