@@ -1,0 +1,56 @@
+---
+
+- name: WoL host, wait for Online and install HP Linux Tools
+  hosts: [all]
+  strategy: "{{ hplt_deploy_strategy | default('free') }}"
+  serial: "{{ hplt_deploy_serial | default('1') }}"
+  become: "{{ hplt_deploy_become | default(true) }}"
+  gather_facts: no
+
+  pre_tasks:
+
+    - name: (hp linux tools) Wake host via WoL
+      wakeonlan:
+        mac: "{{ primary_macaddress | default(macaddress) }}"
+        port: "{{ hplt_wol_port | default(9) }}"
+      delegate_to: "{{ hplt_wol_delegate_to_host | default('localhost') }}"
+      ignore_errors: "{{ hplt_wol_ignore_errors | default(false) }}"
+      when:
+        - hplt_wol is defined
+        - hplt_wol | bool
+
+    - name: (hp linux tools) Waiting for host to come back online
+      wait_for:
+        connect_timeout: "{{ hplt_wait_timeout_net | default(5) }}"
+        host: "{{ ansible_host }}"
+        port: "{{ hplt_wait_port | default(22) }}"
+        sleep: "{{ hplt_wait_sleep | default(2) }}"
+        timeout: "{{ hplt_wait_timeout_total | default(60) }}"
+      delegate_to: "{{ hplt_wait_for_delegate_to_host | default('localhost') }}"
+      ignore_errors: "{{ hplt_wait_for_ignore_errors | default(false) }}"
+      when:
+        - hplt_wait_for is defined
+        - hplt_wait_for | bool
+        - ansible_host is defined
+        - ansible_host | length > 0
+
+    - name: (hp linux tools) get hardware facts
+      setup:
+        gather_subset: hardware
+
+    - name: (hp linux tools) end play on invalid system_vendor
+      block:
+        - name: (hp linux tools) debug system vendor
+          debug:
+            msg: "system_vendor: {{ ansible_facts['system_vendor'] }} not in ({{ hplt_dmi_valid_system_vendor | join(', ') }})"
+        - meta: end_host
+      when:
+        - hplt_dmi_system_vendor | bool
+        - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
+
+    - name: (hp linux tools) get all facts
+      setup:
+        gather_subset: all
+
+  roles:
+    - gcoop-libre.hp_linux_tools
