@@ -2,7 +2,7 @@
 
 This role, download, build, install a _HP Linux Tools_ (`hpuefi-mod`
 kernel module) and execute `hp-repsetup` to get and set _BIOS_
-configuration from file.
+configuration from file (`HPSETUP.TXT`).
 
 ## Requirements
 
@@ -35,7 +35,7 @@ If you want to download `HPSETUP.TXT` and set _BIOS_ configuration:
 ```yaml
 ---
 
-- name: install hp_linux_tools
+- name: Install HP Linux Tools
   hosts: [all]
 
   roles:
@@ -46,6 +46,16 @@ If you want to download `HPSETUP.TXT` and set _BIOS_ configuration:
       hplt_repsetup_hpsetup_file_host: https://example.com
       hplt_reboot_and_wait: True
 ```
+
+## Playbooks
+
+|  _playbook_                      | _description_                                          |
+|----------------------------------|--------------------------------------------------------|
+| `tests/dmi-validate.yml        ` | _Validate DMI (Desktop Management Interface)_          |
+| `tests/test.yml                ` | _Install HP Linux Tools_                               |
+| `tests/wol-wait-install.yml    ` | _WoL host, wait for Online and install HP Linux Tools_ |
+| `tests/wol-wait-lspci.yml      ` | _WoL host, wait for Online and verify lspci output_    |
+| `tests/wol-wait-system-info.yml` | _WoL host, wait for Online and show System Info_       |
 
 ## References
 
