@@ -57,6 +57,13 @@ If you want to download `HPSETUP.TXT` and set _BIOS_ configuration:
 | `tests/wol-wait-lspci.yml      ` | _WoL host, wait for Online and verify lspci output_    |
 | `tests/wol-wait-system-info.yml` | _WoL host, wait for Online and show System Info_       |
 
+## Hardware Tested
+
+| _bios_date_  | _bios_version_      | _product_name_                   | _network_                            |
+|--------------|---------------------|----------------------------------|--------------------------------------|
+| `12/23/2019` | `R23 Ver. 02.04.01` | _HP ProDesk 400 G5 Desktop Mini_ | _Realtek RTL8111/8168/8411 (rev 15)_ |
+| `04/27/2020` | `R23 Ver. 02.05.01` | _HP ProDesk 400 G5 Desktop Mini_ | _Realtek RTL8111/8168/8411 (rev 15)_ |
+
 ## References
 
 - https://ftp.ext.hp.com/pub/caps-softpaq/cmit/whitepapers/HP_Linux_Tools_Users_Guide.pdf
