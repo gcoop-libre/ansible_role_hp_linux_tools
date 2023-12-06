@@ -18,6 +18,7 @@ hplt_repsetup_hpsetup_file_path: "{{ hplt_repsetup_hpsetup_dir }}/{{ hplt_repset
 hplt_repsetup_hpsetup_file_url: "{{ hplt_repsetup_hpsetup_file_host }}/{{ hplt_repsetup_hpsetup_file_name }}"
 hplt_repsetup_hpsetup_get: False
 hplt_repsetup_hpsetup_set: False
+hplt_repsetup_hpsetup_set_success: 'All BIOS options programmed successfully'
 hplt_repsetup_hpsetup_show: True
 hplt_repsetup_mode: '0700'
 hplt_repsetup_owner: root
