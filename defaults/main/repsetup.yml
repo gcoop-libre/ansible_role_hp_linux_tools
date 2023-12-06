@@ -7,8 +7,10 @@ hplt_repsetup_command_rst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_
 hplt_repsetup_command_set: "{{ hplt_repsetup_command_bin }} -s"
 hplt_repsetup_command_tst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n {{ hplt_repsetup_password_current }}"
 hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64"
+hplt_repsetup_hpsetup_access_denied: 'PCI Express Power Management(Access Denied)'
 hplt_repsetup_hpsetup_dir: /root
 hplt_repsetup_hpsetup_down: True
+hplt_repsetup_hpsetup_fail: True
 hplt_repsetup_hpsetup_file_checksum: 35ef4e0e1d305777f3700cd9a123087fa9230232d237a0188805fe58c362c0d5
 hplt_repsetup_hpsetup_file_host: https://osiux.com
 hplt_repsetup_hpsetup_file_name: HPSETUP-ASPM-DISABLE.TXT
