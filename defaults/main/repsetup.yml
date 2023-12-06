@@ -3,6 +3,7 @@
 hplt_repsetup_checksum: 3080302a659b861580a182d4af89c952867e3a1eb84020ea458ae913f01be88b
 hplt_repsetup_command_bin: "{{ hplt_repsetup_dir }}/builds/{{ hplt_repsetup_bin }}"
 hplt_repsetup_command_get: "{{ hplt_repsetup_command_bin }} -a -g"
+hplt_repsetup_command_rst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n /"
 hplt_repsetup_command_set: "{{ hplt_repsetup_command_bin }} -s"
 hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64"
 hplt_repsetup_hpsetup_dir: /root
@@ -17,4 +18,5 @@ hplt_repsetup_hpsetup_set: False
 hplt_repsetup_hpsetup_show: True
 hplt_repsetup_mode: '0700'
 hplt_repsetup_owner: root
+hplt_repsetup_password_current: Admin
 hplt_repsetup_tasks: True
