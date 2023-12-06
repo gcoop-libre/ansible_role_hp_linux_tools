@@ -17,6 +17,8 @@ hplt_repsetup_hpsetup_file_name: HPSETUP-ASPM-DISABLE.TXT
 hplt_repsetup_hpsetup_file_path: "{{ hplt_repsetup_hpsetup_dir }}/{{ hplt_repsetup_hpsetup_file_name }}"
 hplt_repsetup_hpsetup_file_url: "{{ hplt_repsetup_hpsetup_file_host }}/{{ hplt_repsetup_hpsetup_file_name }}"
 hplt_repsetup_hpsetup_get: False
+hplt_repsetup_hpsetup_pwd_admin: False
+hplt_repsetup_hpsetup_pwd_success: 'Admin password updated successfully'
 hplt_repsetup_hpsetup_set: False
 hplt_repsetup_hpsetup_set_success: 'All BIOS options programmed successfully'
 hplt_repsetup_hpsetup_show: True
