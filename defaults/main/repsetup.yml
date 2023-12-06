@@ -1,7 +1,7 @@
 ---
 
 hplt_repsetup_checksum: 3080302a659b861580a182d4af89c952867e3a1eb84020ea458ae913f01be88b
-hplt_repsetup_command_bin: "{{ hplt_repsetup_dir}}/builds/{{ hplt_repsetup_bin }}"
+hplt_repsetup_command_bin: "{{ hplt_repsetup_dir }}/builds/{{ hplt_repsetup_bin }}"
 hplt_repsetup_command_get: "{{ hplt_repsetup_command_bin }} -a -g"
 hplt_repsetup_command_set: "{{ hplt_repsetup_command_bin }} -s"
 hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64"
