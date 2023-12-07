@@ -13,7 +13,7 @@
     - hplt_repsetup_hpsetup_down | bool
     - not hplt_repsetup_hpsetup_get | bool
 
-- name: (hp linux tools) verify hp-repsetup is executable
+- name: (hp linux tools) ensure hp-repsetup is executable
   file:
     path: "{{ hplt_repsetup_command_bin }}"
     owner: "{{ hplt_repsetup_owner }}"
