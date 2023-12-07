@@ -34,6 +34,16 @@
   become: yes
   when: hplt_repsetup_hpsetup_show | bool
 
+- name: (hp linux tools) BIOS test/set Admin Password
+  command: "{{ hplt_repsetup_command_tst }}"
+  ignore_errors: True
+  no_log: "{{ hplt_repsetup_hpsetup_set_no_log | default(true) }}"
+  register: hplt_repsetup_hpsetup_tst_register
+  become: yes
+  when:
+    - hplt_repsetup_hpsetup_set is defined
+    - hplt_repsetup_hpsetup_set | bool
+
 - name: (hp linux tools) BIOS set HPSETUP
   command: "{{ hplt_repsetup_command_set }} {{ hplt_repsetup_hpsetup_file_path }}"
   ignore_errors: True
