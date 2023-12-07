@@ -30,6 +30,10 @@
   include_tasks: repsetup.yml
   when: hplt_repsetup_tasks | bool
 
+- name: (hp linux tools) include reset tasks
+  include_tasks: reset.yml
+  when: hplt_reset_tasks | bool
+
 - name: (hp linux tools) include reboot tasks
   include_tasks: reboot.yml
   when: hplt_reboot_tasks | bool
