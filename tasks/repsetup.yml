@@ -34,6 +34,13 @@
   become: yes
   when: hplt_repsetup_hpsetup_show | bool
 
+- name: (hp linux tools) fails when hplt_repsetup_password_current has invalid
+  fail:
+    msg: hplt_repsetup_password_current has invalid {{ hplt_repsetup_password_invalid }}
+  no_log: "{{ hplt_repsetup_hpsetup_set_no_log | default(true) }}"
+  when:
+    - hplt_repsetup_password_invalid in hplt_repsetup_password_current | list | first
+
 - name: (hp linux tools) BIOS test/set Admin Password
   command: "{{ hplt_repsetup_command_tst }}"
   ignore_errors: True
