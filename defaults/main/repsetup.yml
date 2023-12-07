@@ -22,6 +22,7 @@ hplt_repsetup_hpsetup_pwd_success: 'Admin password updated successfully'
 hplt_repsetup_hpsetup_rst: False
 hplt_repsetup_hpsetup_rst_already: '(Invalid Parameter)'
 hplt_repsetup_hpsetup_set: False
+hplt_repsetup_hpsetup_set_all: True
 hplt_repsetup_hpsetup_set_bios: False
 hplt_repsetup_hpsetup_set_success: 'All BIOS options programmed successfully'
 hplt_repsetup_hpsetup_show: True
