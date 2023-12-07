@@ -111,7 +111,7 @@
     - hplt_repsetup_hpsetup_set_register is defined
     - hplt_repsetup_hpsetup_access_denied in hplt_repsetup_hpsetup_set_register.stdout
 
-- name: (hp linux tools) enable hplt_repsetup_hpsetup_set_bios when All BIOS options programmed successfully
+- name: (hp linux tools) enable hplt_repsetup_hpsetup_set_bios when All BIOS options programmed successfully after without Admin Password
   set_fact:
     hplt_repsetup_hpsetup_set_bios: true
   when:
