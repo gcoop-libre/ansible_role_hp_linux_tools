@@ -50,3 +50,13 @@
   become: yes
   when: hplt_repsetup_hpsetup_set | bool
 
+- name: (hp linux tools) enable hplt_repsetup_hpsetup_pwd_admin when Admin Password test is successful
+  set_fact:
+    hplt_repsetup_hpsetup_pwd_admin: true
+  when:
+    - hplt_repsetup_hpsetup_tst_register is defined
+    - hplt_repsetup_hpsetup_tst_register.failed is defined
+    - not hplt_repsetup_hpsetup_tst_register.failed | bool
+    - hplt_repsetup_hpsetup_tst_register.rc == 0
+    - hplt_repsetup_hpsetup_pwd_success in hplt_repsetup_hpsetup_tst_register.stdout
+
