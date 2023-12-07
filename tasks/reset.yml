@@ -1,0 +1,60 @@
+---
+
+- name: (hp linux tools) get hp-repsetup command stat
+  stat:
+    path: "{{ hplt_repsetup_command_bin }}"
+  register: hplt_repsetup_command_stat
+  become: yes
+
+- name: (hp linux tools) fails when hp-repsetup command does not exist
+  fail:
+    msg: not found {{ hplt_repsetup_command_bin }}
+  when:
+    - not hplt_repsetup_command_stat.stat.exists | bool
+
+- name: (hp linux tools) fails when hplt_repsetup_password_current has invalid
+  fail:
+    msg: hplt_repsetup_password_current has invalid {{ hplt_repsetup_password_invalid }}
+  no_log: "{{ hplt_repsetup_hpsetup_set_no_log | default(true) }}"
+  when:
+    - hplt_repsetup_password_invalid in hplt_repsetup_password_current | list | first
+
+- name: (hp linux tools) BIOS reset Admin Password
+  command: "{{ hplt_repsetup_command_rst }}"
+  ignore_errors: True
+  no_log: "{{ hplt_repsetup_hpsetup_set_no_log | default(true) }}"
+  register: hplt_repsetup_hpsetup_rst_register
+  become: yes
+  when:
+    - hplt_repsetup_hpsetup_rst is defined
+    - hplt_repsetup_hpsetup_rst | bool
+
+- name: (hp linux tools) enable hplt_repsetup_reset_admin when Admin Password reset is successful
+  set_fact:
+    hplt_repsetup_reset_admin: true
+  when:
+    - hplt_repsetup_hpsetup_rst_register is defined
+    - hplt_repsetup_hpsetup_rst_register.failed is defined
+    - not hplt_repsetup_hpsetup_rst_register.failed | bool
+    - hplt_repsetup_hpsetup_rst_register.rc is defined
+    - hplt_repsetup_hpsetup_rst_register.rc == 0
+    - hplt_repsetup_hpsetup_pwd_success in hplt_repsetup_hpsetup_rst_register.stdout
+
+- name: (hp linux tools) enable hplt_repsetup_reset_admin when Admin Password already reset
+  set_fact:
+    hplt_repsetup_reset_admin: true
+  when:
+    - hplt_repsetup_hpsetup_rst_register is defined
+    - hplt_repsetup_hpsetup_rst_register.failed is defined
+    - hplt_repsetup_hpsetup_rst_register.failed | bool
+    - hplt_repsetup_hpsetup_rst_register.rc == 136
+    - hplt_repsetup_hpsetup_rst_already in hplt_repsetup_hpsetup_rst_register.stdout
+
+- name: (hp linux tools) fail when Admin Password reset is failed
+  fail:
+  when:
+    - hplt_repsetup_reset_fail is defined
+    - hplt_repsetup_reset_fail | bool
+    - hplt_repsetup_reset_admin is defined
+    - not hplt_repsetup_reset_admin | bool
+    - hplt_repsetup_reset_admin | bool
