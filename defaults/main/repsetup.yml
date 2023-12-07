@@ -28,4 +28,5 @@ hplt_repsetup_mode: '0700'
 hplt_repsetup_owner: root
 hplt_repsetup_password_current: Admin
 hplt_repsetup_password_invalid: ansible_vault
+hplt_repsetup_password_new: "{{ hplt_repsetup_password_current }}"
 hplt_repsetup_tasks: True
