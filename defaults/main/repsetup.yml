@@ -32,3 +32,4 @@ hplt_repsetup_password_new: "{{ hplt_repsetup_password_current }}"
 hplt_repsetup_reset_admin: False
 hplt_repsetup_reset_fail: False
 hplt_repsetup_tasks: True
+hplt_reset_tasks: False
