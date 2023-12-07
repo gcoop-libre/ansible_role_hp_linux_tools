@@ -54,3 +54,15 @@
     - hplt_repsetup_hpsetup_tst_register.rc == 0
     - hplt_repsetup_hpsetup_pwd_success in hplt_repsetup_hpsetup_tst_register.stdout
 
+- name: (hp linux tools) BIOS set HPSETUP using Admin Password
+  command: "{{ hplt_repsetup_command_set }} -p {{ hplt_repsetup_password_current }} {{ hplt_repsetup_hpsetup_file_path }}"
+  ignore_errors: True
+  no_log: "{{ hplt_repsetup_hpsetup_set_no_log | default(true) }}"
+  register: hplt_repsetup_hpsetup_set_register
+  become: yes
+  when:
+    - hplt_repsetup_hpsetup_set is defined
+    - hplt_repsetup_hpsetup_set | bool
+    - hplt_repsetup_hpsetup_pwd_admin is defined
+    - hplt_repsetup_hpsetup_pwd_admin | bool
+
