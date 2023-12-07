@@ -44,12 +44,6 @@
     - hplt_repsetup_hpsetup_set is defined
     - hplt_repsetup_hpsetup_set | bool
 
-- name: (hp linux tools) BIOS set HPSETUP
-  command: "{{ hplt_repsetup_command_set }} {{ hplt_repsetup_hpsetup_file_path }}"
-  ignore_errors: True
-  become: yes
-  when: hplt_repsetup_hpsetup_set | bool
-
 - name: (hp linux tools) enable hplt_repsetup_hpsetup_pwd_admin when Admin Password test is successful
   set_fact:
     hplt_repsetup_hpsetup_pwd_admin: true
