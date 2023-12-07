@@ -91,3 +91,16 @@
     - hplt_repsetup_hpsetup_pwd_admin is defined
     - not hplt_repsetup_hpsetup_pwd_admin | bool
 
+- name: (hp linux tools) fail when found Access Denied in BIOS set HPSETUP without Admin Password
+  fail:
+  when:
+    - hplt_repsetup_hpsetup_set is defined
+    - hplt_repsetup_hpsetup_set | bool
+    - hplt_repsetup_hpsetup_pwd_admin is defined
+    - not hplt_repsetup_hpsetup_pwd_admin | bool
+    - hplt_repsetup_hpsetup_fail is defined
+    - hplt_repsetup_hpsetup_fail | bool
+    - hplt_repsetup_hpsetup_access_denied is defined
+    - hplt_repsetup_hpsetup_set_register is defined
+    - hplt_repsetup_hpsetup_access_denied in hplt_repsetup_hpsetup_set_register.stdout
+
