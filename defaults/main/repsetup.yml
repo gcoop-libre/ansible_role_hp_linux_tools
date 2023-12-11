@@ -39,3 +39,4 @@ hplt_repsetup_reset_fail: True
 hplt_repsetup_tasks: True
 hplt_repsetup_update_fail: True
 hplt_reset_tasks: False
+hplt_update_tasks: False
