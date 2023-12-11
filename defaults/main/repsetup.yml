@@ -27,6 +27,8 @@ hplt_repsetup_hpsetup_set_all: True
 hplt_repsetup_hpsetup_set_bios: False
 hplt_repsetup_hpsetup_set_success: 'All BIOS options programmed successfully'
 hplt_repsetup_hpsetup_show: True
+hplt_repsetup_hpsetup_upd: False
+hplt_repsetup_hpsetup_upd_failed: '(Security Violation)'
 hplt_repsetup_mode: '0700'
 hplt_repsetup_owner: root
 hplt_repsetup_password_current: Admin
@@ -35,4 +37,5 @@ hplt_repsetup_password_new: "{{ hplt_repsetup_password_current }}"
 hplt_repsetup_reset_admin: False
 hplt_repsetup_reset_fail: False
 hplt_repsetup_tasks: True
+hplt_repsetup_update_fail: True
 hplt_reset_tasks: False
