@@ -35,7 +35,7 @@ hplt_repsetup_password_current: Admin
 hplt_repsetup_password_invalid: ansible_vault
 hplt_repsetup_password_new: "{{ hplt_repsetup_password_current }}"
 hplt_repsetup_reset_admin: False
-hplt_repsetup_reset_fail: False
+hplt_repsetup_reset_fail: True
 hplt_repsetup_tasks: True
 hplt_repsetup_update_fail: True
 hplt_reset_tasks: False
