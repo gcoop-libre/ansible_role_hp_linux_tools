@@ -8,6 +8,7 @@ configuration from file (`HPSETUP.TXT`).
 
 | _date_     | _tag_      | _description_                                                                                                                                                                                                           |
 |------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2023-12-11 | `  v0.2.4` | add support for config options with/without BIOS Admin Password, add tasks to reset/update BIOS Admin Password, by default download HPSETUP-ASPM-DISABLE.TXT to disable PCI Express Power Management                    |
 | 2023-10-06 | `  v0.2.3` | add wol-wait-lspci playbook for WakeOnLAN, wait for SSH and verify lspci output, add wol-wait-system-info playbook for WakeOnLAN, wait for SSH and get and show System Info, improve README, ansible-lint and gitlab-ci |
 | 2023-09-29 | `  v0.2.2` | add wol-wait-install playbook for WakeOnLAN, wait for SSH and install HP Linux Tools only when match with system_vendor                                                                                                 |
 | 2022-08-10 | `  v0.2.1` | add dmi-validate playbook for test and ignore fail on invalid (bios_date|bios_version|product_name|system_vendor)                                                                                                       |
