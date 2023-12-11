@@ -32,7 +32,9 @@
 
 - name: (hp linux tools) include reset tasks
   include_tasks: reset.yml
-  when: hplt_reset_tasks | bool
+  when:
+    - hplt_reset_tasks | bool
+    - not hplt_update_tasks | bool
 
 - name: (hp linux tools) include reboot tasks
   include_tasks: reboot.yml
