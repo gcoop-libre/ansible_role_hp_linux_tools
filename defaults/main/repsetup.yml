@@ -1,20 +1,42 @@
 ---
 
 hplt_repsetup_checksum: 3080302a659b861580a182d4af89c952867e3a1eb84020ea458ae913f01be88b
-hplt_repsetup_command_bin: "{{ hplt_repsetup_dir}}/builds/{{ hplt_repsetup_bin }}"
+hplt_repsetup_command_bin: "{{ hplt_repsetup_dir }}/builds/{{ hplt_repsetup_bin }}"
 hplt_repsetup_command_get: "{{ hplt_repsetup_command_bin }} -a -g"
+hplt_repsetup_command_rst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n /"
 hplt_repsetup_command_set: "{{ hplt_repsetup_command_bin }} -s"
+hplt_repsetup_command_tst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n {{ hplt_repsetup_password_current }}"
+hplt_repsetup_command_upd: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n {{ hplt_repsetup_password_new }}"
 hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64"
+hplt_repsetup_hpsetup_access_denied: 'PCI Express Power Management(Access Denied)'
 hplt_repsetup_hpsetup_dir: /root
-hplt_repsetup_hpsetup_down: False
-hplt_repsetup_hpsetup_file_checksum: 1b0c05bd9ef7bc76147211d148563052d65b142f95ca703a73d5a72660df8397
-hplt_repsetup_hpsetup_file_host: https://example.com
-hplt_repsetup_hpsetup_file_name: HPSETUP.TXT
+hplt_repsetup_hpsetup_down: True
+hplt_repsetup_hpsetup_fail: True
+hplt_repsetup_hpsetup_file_checksum: 35ef4e0e1d305777f3700cd9a123087fa9230232d237a0188805fe58c362c0d5
+hplt_repsetup_hpsetup_file_host: https://osiux.com
+hplt_repsetup_hpsetup_file_name: HPSETUP-ASPM-DISABLE.TXT
 hplt_repsetup_hpsetup_file_path: "{{ hplt_repsetup_hpsetup_dir }}/{{ hplt_repsetup_hpsetup_file_name }}"
 hplt_repsetup_hpsetup_file_url: "{{ hplt_repsetup_hpsetup_file_host }}/{{ hplt_repsetup_hpsetup_file_name }}"
-hplt_repsetup_hpsetup_get: True
+hplt_repsetup_hpsetup_get: False
+hplt_repsetup_hpsetup_pwd_admin: False
+hplt_repsetup_hpsetup_pwd_success: 'Admin password updated successfully'
+hplt_repsetup_hpsetup_rst: False
+hplt_repsetup_hpsetup_rst_already: '(Invalid Parameter)'
 hplt_repsetup_hpsetup_set: False
+hplt_repsetup_hpsetup_set_all: True
+hplt_repsetup_hpsetup_set_bios: False
+hplt_repsetup_hpsetup_set_success: 'All BIOS options programmed successfully'
 hplt_repsetup_hpsetup_show: True
+hplt_repsetup_hpsetup_upd: False
+hplt_repsetup_hpsetup_upd_failed: '(Security Violation)'
 hplt_repsetup_mode: '0700'
 hplt_repsetup_owner: root
+hplt_repsetup_password_current: Admin
+hplt_repsetup_password_invalid: ansible_vault
+hplt_repsetup_password_new: "{{ hplt_repsetup_password_current }}"
+hplt_repsetup_reset_admin: False
+hplt_repsetup_reset_fail: True
 hplt_repsetup_tasks: True
+hplt_repsetup_update_fail: True
+hplt_reset_tasks: False
+hplt_update_tasks: False
