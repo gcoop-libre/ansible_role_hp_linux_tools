@@ -61,6 +61,17 @@
     - hplt_hpuefi_mod_find_last is defined
     - hplt_hpuefi_mod_find_last | bool
 
+- name: set most recent hpuefi-mod.tgz file and path
+  set_fact:
+    hplt_hpuefi_mod_tgz_file: "{{ hplt_hpuefi_mod_tgz_register.stdout | split(' ') | first }}"
+    hplt_hpuefi_mod_tgz_path: "{{ hplt_hpuefi_mod_tgz_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hpuefi_mod_tgz_register is defined
+    - hplt_hpuefi_mod_tgz_register.failed is defined
+    - not hplt_hpuefi_mod_tgz_register.failed | bool
+    - hplt_hpuefi_mod_find_last is defined
+    - hplt_hpuefi_mod_find_last | bool
+
 - name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
     src: "{{ hplt_hpuefi_mod_tgz_path }}/{{ hplt_hpuefi_mod_tgz_file }}"
