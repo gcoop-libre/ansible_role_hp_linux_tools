@@ -11,7 +11,7 @@ hplt_repsetup_command_rst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_
 hplt_repsetup_command_set: "{{ hplt_repsetup_command_bin }} -s"
 hplt_repsetup_command_tst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n {{ hplt_repsetup_password_current }}"
 hplt_repsetup_command_upd: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n {{ hplt_repsetup_password_new }}"
-hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64"
+hplt_repsetup_dir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-{{ hplt_version }}_x86_64"
 hplt_repsetup_hpsetup_access_denied: 'PCI Express Power Management(Access Denied)'
 hplt_repsetup_hpsetup_dir: /root
 hplt_repsetup_hpsetup_down: True
