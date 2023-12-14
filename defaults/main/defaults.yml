@@ -1,6 +1,7 @@
 ---
 
 hplt_algorithm: sha256
+hplt_clean: False
 hplt_dir: /root/hp-linux-tools
 hplt_dir_mode: '0700'
 hplt_dir_owner: root
