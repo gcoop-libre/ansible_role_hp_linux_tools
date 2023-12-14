@@ -49,7 +49,7 @@
 
 - name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
-    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpuefi_name }}"
+    src: "{{ hplt_hpuefi_mod_tgz_path }}/{{ hplt_hpuefi_mod_tgz_file }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
     owner: "{{ hplt_file_owner }}"
     group: root
