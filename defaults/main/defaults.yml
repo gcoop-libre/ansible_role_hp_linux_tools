@@ -9,6 +9,7 @@ hplt_download_timeout: 300
 hplt_proxy_environment: []
 hplt_proxy_use: False
 hplt_tmp: /root
+hplt_version: "{{ hplt_versions | map(attribute='version') | sort | last }}"
 hplt_versions:
   - version: '3.21'
     hp_flash_file: hp-flash-3.21_x86_64.tgz
