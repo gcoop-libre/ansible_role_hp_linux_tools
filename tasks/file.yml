@@ -1,6 +1,6 @@
 ---
 
-- name: (hp linux tools) verify directory is present
+- name: (hp linux tools) ensure directory {{ hplt_dir }} exists
   file:
     mode: "{{ hplt_dir_mode }}"
     owner: "{{ hplt_dir_owner }}"
