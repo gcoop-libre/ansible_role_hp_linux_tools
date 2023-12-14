@@ -118,3 +118,18 @@
     remote_src: yes
   become: yes
   when: hplt_file_extract | bool
+
+- name: find most recent hp-repsetup bin
+  shell: |
+    set -o pipefail;
+    TMP=$(mktemp);
+    find {{ hplt_dir }} -iname '{{ hplt_repsetup_bin }}' > "$TMP" &&
+    FILE=$(cat "$TMP" | xargs -n1 basename | sort -Vr | head -1);
+    echo "$FILE" "$(grep -w "$FILE" "$TMP" | sort -Vr | head -1 | xargs -n1 dirname)"
+  register: hplt_hp_repsetup_bin_register
+  become: true
+  when:
+    - hplt_repsetup_bin is defined
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool
+
