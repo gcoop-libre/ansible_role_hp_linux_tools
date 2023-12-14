@@ -60,7 +60,7 @@
 
 - name: (hp linux tools) extract {{ hplt_hpflash_name }}
   unarchive:
-    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpflash_name }}"
+    src: "{{ hplt_hp_flash_tgz_path }}/{{ hplt_hp_flash_tgz_file }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
     owner: "{{ hplt_file_owner }}"
     group: root
