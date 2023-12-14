@@ -6,7 +6,6 @@ hplt_dir: /root/hp-linux-tools
 hplt_dir_mode: '0700'
 hplt_dir_owner: root
 hplt_download_timeout: 300
-hplt_hpflash_name: hp-flash-3.21_x86_64.tgz
 hplt_proxy_environment: []
 hplt_proxy_use: False
 hplt_tmp: /root
