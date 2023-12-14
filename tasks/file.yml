@@ -17,6 +17,14 @@
     state: directory
   become: yes
 
+- name: (hp linux tools) ensure directory {{ hplt_dir }}/{{ hplt_distro_dir }} exists
+  file:
+    mode: "{{ hplt_dir_mode }}"
+    owner: "{{ hplt_dir_owner }}"
+    path: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+    state: directory
+  become: yes
+
 - name: (hp linux tools) download tarball if missing or checksum differs for version {{ hplt_version }}
   get_url:
     url: "{{ hplt_file_url }}"
