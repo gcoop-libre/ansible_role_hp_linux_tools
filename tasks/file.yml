@@ -1,5 +1,14 @@
 ---
 
+- name: (hp linux tools) clean directory {{ hplt_dir }}
+  file:
+    state: absent
+    path: "{{ hplt_dir }}/"
+  become: yes
+  when:
+    - hplt_clean is defined
+    - hplt_clean | bool
+
 - name: (hp linux tools) ensure directory {{ hplt_dir }} exists
   file:
     mode: "{{ hplt_dir_mode }}"
