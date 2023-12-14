@@ -5,6 +5,7 @@ hplt_hpuefi_mkdev: True
 hplt_hpuefi_mkdev_bin: mkdevhpuefi
 hplt_hpuefi_mkdev_command: "{{ hplt_hpuefi_mkdev_path }}"
 hplt_hpuefi_mkdev_path: "{{ hplt_hpuefi_mod_bin_path }}/{{ hplt_hpuefi_mkdev_bin }}"
+hplt_hpuefi_mod_bin_path: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hpuefi_mod_bdir') | first }}"
 hplt_hpuefi_mode: '0700'
 hplt_hpuefi_modprobe: True
 hplt_hpuefi_name: hpuefi-mod-3.03.tgz
