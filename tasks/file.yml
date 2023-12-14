@@ -27,7 +27,7 @@
 
 - name: (hp linux tools) download tarball if missing or checksum differs for version {{ hplt_version }}
   get_url:
-    url: "{{ hplt_file_url }}"
+    url: "{{ hplt_file_url }}/{{ hplt_file_name }}"
     dest: "{{ hplt_tmp }}/{{ hplt_file_name }}"
     checksum: "{{ hplt_algorithm | lower }}:{{ hplt_file_checksum }}"
     use_proxy: "{{ hplt_proxy_use }}"
