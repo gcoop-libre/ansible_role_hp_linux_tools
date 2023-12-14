@@ -17,7 +17,7 @@
     state: directory
   become: yes
 
-- name: (hp linux tools) download tarball if missing or checksum differs
+- name: (hp linux tools) download tarball if missing or checksum differs for version {{ hplt_version }}
   get_url:
     url: "{{ hplt_file_url }}"
     dest: "{{ hplt_tmp }}/{{ hplt_file_name }}"
