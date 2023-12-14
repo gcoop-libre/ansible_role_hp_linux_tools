@@ -58,7 +58,7 @@
   become: yes
   when: hplt_file_extract | bool
 
-- name: (hp linux tools) extract {{ hplt_hpflash_name }}
+- name: (hp linux tools) extract {{ hplt_hp_flash_tgz_file }}
   unarchive:
     src: "{{ hplt_hp_flash_tgz_path }}/{{ hplt_hp_flash_tgz_file }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
