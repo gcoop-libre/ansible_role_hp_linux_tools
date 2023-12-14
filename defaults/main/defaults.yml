@@ -9,3 +9,24 @@ hplt_download_timeout: 300
 hplt_proxy_environment: []
 hplt_proxy_use: False
 hplt_tmp: /root
+hplt_versions:
+  - version: '3.21'
+    hp_flash_file: hp-flash-3.21_x86_64.tgz
+    hp_flash_path: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+    hplt_file_checksum: e7790575d4646c00b38a57d15f59d73b377c99e706f91bd18d712ba55f3915dc
+    hplt_file_name: sp111455.tgz
+    hplt_file_url: https://ftp.hp.com/pub/softpaq/sp111001-111500
+    hplt_repsetup_command_bin: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hp-flash-3.21_x86_64/builds/{{ hplt_repsetup_bin }}"
+    hpuefi_mod_bdir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hpuefi-mod-3.03"
+    hpuefi_mod_file: hpuefi-mod-3.03.tgz
+    hpuefi_mod_path: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+  - version: '3.22'
+    hp_flash_file: hp-flash-3.22_x86_64.tgz
+    hp_flash_path: "{{ hplt_dir }}/hpflash-3.22/{{ hplt_distro_dir }}"
+    hplt_file_checksum: 11110a2b07d9b395371e8707d026c27c315d862e1cb16f1405f74649c7debc69
+    hplt_file_name: sp143035.tgz
+    hplt_file_url: https://ftp.hp.com/pub/softpaq/sp143001-143500
+    hplt_repsetup_command_bin: "{{ hplt_dir }}/hpflash-3.22/{{ hplt_distro_dir }}/hp-flash-3.22_x86_64/builds/{{ hplt_repsetup_bin }}"
+    hpuefi_mod_bdir: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hpuefi-mod-3.04"
+    hpuefi_mod_file: hpuefi-mod-3.04.tgz
+    hpuefi_mod_path: "{{ hplt_dir }}/hpflash-3.22/{{ hplt_distro_dir }}"
