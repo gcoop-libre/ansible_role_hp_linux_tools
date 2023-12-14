@@ -72,6 +72,20 @@
     - hplt_hpuefi_mod_find_last is defined
     - hplt_hpuefi_mod_find_last | bool
 
+- name: find most recent hp-flash.tgz
+  shell: |
+    set -o pipefail;
+    TMP=$(mktemp);
+    find {{ hplt_dir }} -iname '{{ hplt_hp_flash_find_iname }}' > "$TMP" &&
+    FILE=$(cat "$TMP" | xargs -n1 basename | sort -Vr | head -1);
+    echo "$FILE" "$(grep -w "$FILE" "$TMP" | head -1 | xargs -n1 dirname)"
+  register: hplt_hp_flash_tgz_register
+  become: true
+  when:
+    - hplt_hp_flash_find_iname is defined
+    - hplt_hp_flash_find_last is defined
+    - hplt_hp_flash_find_last | bool
+
 - name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
     src: "{{ hplt_hpuefi_mod_tgz_path }}/{{ hplt_hpuefi_mod_tgz_file }}"
