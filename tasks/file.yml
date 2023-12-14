@@ -86,6 +86,17 @@
     - hplt_hp_flash_find_last is defined
     - hplt_hp_flash_find_last | bool
 
+- name: set most recent hp-flash.tgz file and path
+  set_fact:
+    hplt_hp_flash_tgz_file: "{{ hplt_hp_flash_tgz_register.stdout | split(' ') | first }}"
+    hplt_hp_flash_tgz_path: "{{ hplt_hp_flash_tgz_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hp_flash_tgz_register is defined
+    - hplt_hp_flash_tgz_register.failed is defined
+    - not hplt_hp_flash_tgz_register.failed | bool
+    - hplt_hp_flash_find_last is defined
+    - hplt_hp_flash_find_last | bool
+
 - name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
     src: "{{ hplt_hpuefi_mod_tgz_path }}/{{ hplt_hpuefi_mod_tgz_file }}"
