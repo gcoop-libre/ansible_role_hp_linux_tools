@@ -47,7 +47,7 @@
   become: yes
   when: hplt_file_extract | bool
 
-- name: (hp linux tools) extract {{ hplt_hpuefi_name }}
+- name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
     src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpuefi_name }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
