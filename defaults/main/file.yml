@@ -7,4 +7,4 @@ hplt_file_mode: '0644'
 hplt_file_name: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hplt_file_name') | first }}"
 hplt_file_owner: root
 hplt_file_tasks: True
-hplt_file_url: "https://ftp.hp.com/pub/softpaq/sp143001-143500/{{ hplt_file_name }}"
+hplt_file_url: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hplt_file_url') | first }}"
