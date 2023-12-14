@@ -133,3 +133,14 @@
     - hplt_hp_repsetup_bin_find_last is defined
     - hplt_hp_repsetup_bin_find_last | bool
 
+- name: set most recent hp-repsetup bin file and path
+  set_fact:
+    hplt_hp_repsetup_bin_file: "{{ hplt_hp_repsetup_bin_register.stdout | split(' ') | first }}"
+    hplt_hp_repsetup_bin_path: "{{ hplt_hp_repsetup_bin_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hp_repsetup_bin_register is defined
+    - hplt_hp_repsetup_bin_register.failed is defined
+    - not hplt_hp_repsetup_bin_register.failed | bool
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool
+
