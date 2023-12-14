@@ -1,5 +1,6 @@
 ---
 
+hplt_hp_flash_find_iname: hp-flash-*.tgz
 hplt_repsetup_command_bin: "{{ hplt_repsetup_dir }}/builds/{{ hplt_repsetup_bin }}"
 hplt_repsetup_command_get: "{{ hplt_repsetup_command_bin }} -a -g"
 hplt_repsetup_command_rst: "{{ hplt_repsetup_command_bin }} -p {{ hplt_repsetup_password_current }} -n /"
