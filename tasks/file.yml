@@ -144,3 +144,11 @@
     - hplt_hp_repsetup_bin_find_last is defined
     - hplt_hp_repsetup_bin_find_last | bool
 
+- name: set hp-repsetup command bin
+  set_fact:
+    hplt_repsetup_command_bin: "{{ hplt_hp_repsetup_bin_path }}/{{ hplt_hp_repsetup_bin_file }}"
+  when:
+    - hplt_hp_repsetup_bin_path is defined
+    - hplt_hp_repsetup_bin_file is defined
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool
