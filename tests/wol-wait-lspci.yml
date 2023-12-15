@@ -50,5 +50,9 @@
         - hplt_dmi_valid_system_vendor is defined
         - ansible_facts['system_vendor'] not in hplt_dmi_valid_system_vendor
 
+    - name: (hp linux tools) get network facts
+      setup:
+        gather_subset: network
+
     - name: (hp linux tools) include lspci tasks
       include_tasks: ../tasks/lspci.yml
