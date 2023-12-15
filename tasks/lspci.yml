@@ -9,6 +9,15 @@
     - hplt_lspci_eth_device_info | bool
     - hplt_lspci_eth_device is defined
 
+- name: (hp linux tools) show lspci information filtered by '{{ hplt_lspci_eth_status }}'
+  debug:
+    msg: "{{ hplt_lspci_eth_device_register.stdout | regex_search(hplt_lspci_eth_status) }}"
+  when:
+    - hplt_lspci_eth_device_info is defined
+    - hplt_lspci_eth_device_info | bool
+    - hplt_lspci_eth_device_register is defined
+    - hplt_lspci_eth_status is defined
+
 - name: (hp linux tools) fail when '{{ hplt_lspci_eth_status }}' not found
   fail:
   when:
