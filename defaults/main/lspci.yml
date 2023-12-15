@@ -1,7 +1,5 @@
 ---
 
-hplt_lspci_eth_status: 'ASPM Disabled'
-hplt_lspci_eth_device: '0000:02:00.0'
 hplt_lspci_eth_device: "{{ ansible_facts[hplt_lspci_eth_interface].pciid }}"
 hplt_lspci_eth_device_info: True
 hplt_lspci_eth_device_status: True
