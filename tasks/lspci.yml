@@ -9,7 +9,7 @@
     - hplt_lspci_eth_device_info | bool
     - hplt_lspci_eth_device is defined
 
-- name: (hp linux tools) fail when {{ hplt_lspci_eth_status }} not found
+- name: (hp linux tools) fail when '{{ hplt_lspci_eth_status }}' not found
   fail:
   when:
     - hplt_lspci_eth_device_status is defined
