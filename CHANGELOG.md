@@ -2,12 +2,107 @@
 
  - this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
-## [`Unreleased - 2023-12-11`](https://gitlab.com/gcoop-libre/ansible_role_hp_linux_tools/-/compare/v0.2.4...develop)
+## [`Unreleased - 2023-12-15`](https://gitlab.com/gcoop-libre/ansible_role_hp_linux_tools/-/compare/v0.2.5...develop)
+
+### `CHANGELOG`
+
+- add CHANGELOG.md from v0.1.0 to v0.2.4
 
 ### `README`
 
 - add v0.2.4 in Tags Summary
 - add Tags Summary section
+
+## [`v0.2.5 - 2023-12-15`](https://gitlab.com/gcoop-libre/ansible_role_hp_linux_tools/-/compare/v0.2.4...v0.2.5) _add support for multiple versions of HP Linux Tools (currently versions 3.21 and 3.22), improve network interface and PCI device ID detection and better validations, and include test results from HP G5 and G6_
+
+### `defaults/defaults`
+
+- get the latest version of HP Linux Tools
+- add all variables to support multiple versions of HP Linux Tools (currently versions 3.21 and 3.22)
+- remove hardcoded hplt_flash_name
+- by default disable clean HP Linux Tools directory
+
+### `defaults/dmi`
+
+- add tested HP ProDesk 400 G6 Desktop Mini PC (bios_date=11/04/2021, bios_version=S23 Ver. 02.09.02)
+
+### `defaults/file`
+
+- gets the URL for the selected version of HP Linux Tools
+- gets the filename for the selected version of HP Linux Tools
+- gets the checksum for the selected version of HP Linux Tools
+- set sp111455.tgz as a checksum file to download HP Linux Tools v3.22
+
+### `defaults/hpuefi`
+
+- gets the path of the hpuefi kernel module tarball for the selected version of HP Linux Tools
+- gets the filename of the hpuefi kernel module tarball for the selected version of HP Linux Tools
+- remove hardcoded hplt_hpuefi_name
+- by default, disables searching for the latest hpuefi tarball
+- define the pattern to find hpuefi tarball
+- gets the path of the hpuefi kernel module for the selected version of HP Linux Tools
+- define path for mkdevhpuefi binary
+
+### `defaults/lspci`
+
+- remove old and duplicated values of hplt_lspci_eth_status and hplt_lspci_eth_device
+- by default, disables the task from failing when the contents of hplt_lspci_eth_status are not found in the lspci output.
+- by default, enable the task to fail when the contents of hplt_lspci_eth_status are found in the lspci output
+- define hplt_lspci_eth_status as a regular expression, defaulting to 'ASPM.*Enabled;'
+- get network card PCI device ID from ansible_facts
+- get default IPv4 network card interface name from ansible_facts
+
+### `defaults/repsetup`
+
+- gets the path of the hp-flash and hp-repsetup for the selected version of HP Linux Tools
+- by default, disables searching for the latest hp-repsetup binary
+- gets the path of the hp-flash tarball for the selected version of HP Linux Tools
+- gets the filename of the hp-flash tarball for the selected version of HP Linux Tools
+- by default, disables searching for the latest hp-flash tarball
+- define the pattern to find hp-flash tarball
+- remove hardcoded hplt_repsetup_checksum
+
+### `README`
+
+- add tag summary, best playbook example, tested hardware, hp-repsetup results and ASPM statuses reported by lspci
+
+### `task/lspci`
+
+- add task to fail when content of hplt_lspci_eth_status is found in lspci output using regex_search only when hplt_lspci_eth_status_fail_found is enabled
+
+### `tasks/build`
+
+- replace path of hpuefi kernel module for the selected version of HP Linux Tools
+
+### `tasks/file`
+
+- set the filename and path for the latest hp-repsetup binary when hplt_hp_repsetup_bin_find_last is enabled
+- find the latest hp-repsetup binary when hplt_hp_repsetup_bin_find_last is enabled
+- find latest hp-repsetup binary when hplt_hp_repsetup_bin_find_last is enabled
+- set the filename and path for the latest hp-flash tarball when hplt_hp_flash_find_last is enabled
+- find latest hp-flash tarball when hplt_hp_flash_find_last is enabled
+- set the filename and path for the latest hpuefi kernel module tarball when hplt_hpuefi_mod_find_last is enabled
+- find latest hpuefi kernel module tarball when hplt_hpuefi_mod_find_last is enabled
+- change the variable in the task name to clarify which hp-flash tarball is extracted
+- change file source path and file variables to extract hp-flash tarball
+- change file source path and file variables to extract hpuefi tarball
+- change the variable in the task name to clarify which hpuefi tarball is extracted
+- specify the URL and name of the tarball file to download
+- add a task to ensure that the HP Linux tools directory exists for the current distribution
+- change the task name to clarify which version of HP Linux Tools is downloaded
+- add a task to clean the old HP Linux tools directory when hplt_clean is enabled
+- change the task name to clarify and ensure the HP Linux tools directory exists
+
+### `tasks/lspci`
+
+- improve conditional to fail when not found in lspci output using regex_search
+- fail when content of hplt_lspci_eth_device_status is not found in lspci output only when hplt_lspci_eth_status_fail_not_found is enabled
+- display lspci information filtered by the regular expression defined in hplt_lspci_eth_status
+- add quotes to content of hplt_lspci_eth_status in task name fail when not found
+
+### `tests/wol-wait-lspci`
+
+- add get network facts after hardware validation
 
 ## [`v0.2.4 - 2023-12-11`](https://gitlab.com/gcoop-libre/ansible_role_hp_linux_tools/-/compare/v0.2.3...v0.2.4) _add support for config options with/without BIOS Admin Password, add tasks to reset/update BIOS Admin Password, by default download HPSETUP-ASPM-DISABLE.TXT to disable PCI Express Power Management_
 
