@@ -4,9 +4,13 @@ hplt_hpuefi_dir: /lib/modules/{{ ansible_facts.kernel }}/kernel/drivers/hpuefi
 hplt_hpuefi_mkdev: True
 hplt_hpuefi_mkdev_bin: mkdevhpuefi
 hplt_hpuefi_mkdev_command: "{{ hplt_hpuefi_mkdev_path }}"
-hplt_hpuefi_mkdev_path: "{{ hplt_dir }}/{{ hplt_distro_dir }}/hpuefi-mod-3.03/{{ hplt_hpuefi_mkdev_bin }}"
+hplt_hpuefi_mkdev_path: "{{ hplt_hpuefi_mod_bin_path }}/{{ hplt_hpuefi_mkdev_bin }}"
+hplt_hpuefi_mod_bin_path: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hpuefi_mod_bdir') | first }}"
 hplt_hpuefi_mode: '0700'
+hplt_hpuefi_mod_find_iname: hpuefi-*.tgz
+hplt_hpuefi_mod_find_last: False
 hplt_hpuefi_modprobe: True
-hplt_hpuefi_name: hpuefi-mod-3.03.tgz
+hplt_hpuefi_mod_tgz_file: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hpuefi_mod_file') | first }}"
+hplt_hpuefi_mod_tgz_path: "{{ hplt_versions | selectattr('version', 'equalto', hplt_version) | map(attribute='hpuefi_mod_path') | first }}"
 hplt_hpuefi_owner: root
 hplt_hpuefi_tasks: True

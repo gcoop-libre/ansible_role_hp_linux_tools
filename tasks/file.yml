@@ -1,6 +1,15 @@
 ---
 
-- name: (hp linux tools) verify directory is present
+- name: (hp linux tools) clean directory {{ hplt_dir }}
+  file:
+    state: absent
+    path: "{{ hplt_dir }}/"
+  become: yes
+  when:
+    - hplt_clean is defined
+    - hplt_clean | bool
+
+- name: (hp linux tools) ensure directory {{ hplt_dir }} exists
   file:
     mode: "{{ hplt_dir_mode }}"
     owner: "{{ hplt_dir_owner }}"
@@ -8,9 +17,17 @@
     state: directory
   become: yes
 
-- name: (hp linux tools) download tarball if missing or checksum differs
+- name: (hp linux tools) ensure directory {{ hplt_dir }}/{{ hplt_distro_dir }} exists
+  file:
+    mode: "{{ hplt_dir_mode }}"
+    owner: "{{ hplt_dir_owner }}"
+    path: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
+    state: directory
+  become: yes
+
+- name: (hp linux tools) download tarball if missing or checksum differs for version {{ hplt_version }}
   get_url:
-    url: "{{ hplt_file_url }}"
+    url: "{{ hplt_file_url }}/{{ hplt_file_name }}"
     dest: "{{ hplt_tmp }}/{{ hplt_file_name }}"
     checksum: "{{ hplt_algorithm | lower }}:{{ hplt_file_checksum }}"
     use_proxy: "{{ hplt_proxy_use }}"
@@ -30,9 +47,59 @@
   become: yes
   when: hplt_file_extract | bool
 
-- name: (hp linux tools) extract {{ hplt_hpuefi_name }}
+- name: find most recent hpuefi-mod.tgz
+  shell: |
+    set -o pipefail;
+    TMP=$(mktemp);
+    find {{ hplt_dir }} -iname '{{ hplt_hpuefi_mod_find_iname }}' > "$TMP" &&
+    FILE=$(cat "$TMP" | xargs -n1 basename | sort -Vr | head -1);
+    echo "$FILE" "$(grep -w "$FILE" "$TMP" | head -1 | xargs -n1 dirname)"
+  register: hplt_hpuefi_mod_tgz_register
+  become: true
+  when:
+    - hplt_hpuefi_mod_find_iname is defined
+    - hplt_hpuefi_mod_find_last is defined
+    - hplt_hpuefi_mod_find_last | bool
+
+- name: set most recent hpuefi-mod.tgz file and path
+  set_fact:
+    hplt_hpuefi_mod_tgz_file: "{{ hplt_hpuefi_mod_tgz_register.stdout | split(' ') | first }}"
+    hplt_hpuefi_mod_tgz_path: "{{ hplt_hpuefi_mod_tgz_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hpuefi_mod_tgz_register is defined
+    - hplt_hpuefi_mod_tgz_register.failed is defined
+    - not hplt_hpuefi_mod_tgz_register.failed | bool
+    - hplt_hpuefi_mod_find_last is defined
+    - hplt_hpuefi_mod_find_last | bool
+
+- name: find most recent hp-flash.tgz
+  shell: |
+    set -o pipefail;
+    TMP=$(mktemp);
+    find {{ hplt_dir }} -iname '{{ hplt_hp_flash_find_iname }}' > "$TMP" &&
+    FILE=$(cat "$TMP" | xargs -n1 basename | sort -Vr | head -1);
+    echo "$FILE" "$(grep -w "$FILE" "$TMP" | head -1 | xargs -n1 dirname)"
+  register: hplt_hp_flash_tgz_register
+  become: true
+  when:
+    - hplt_hp_flash_find_iname is defined
+    - hplt_hp_flash_find_last is defined
+    - hplt_hp_flash_find_last | bool
+
+- name: set most recent hp-flash.tgz file and path
+  set_fact:
+    hplt_hp_flash_tgz_file: "{{ hplt_hp_flash_tgz_register.stdout | split(' ') | first }}"
+    hplt_hp_flash_tgz_path: "{{ hplt_hp_flash_tgz_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hp_flash_tgz_register is defined
+    - hplt_hp_flash_tgz_register.failed is defined
+    - not hplt_hp_flash_tgz_register.failed | bool
+    - hplt_hp_flash_find_last is defined
+    - hplt_hp_flash_find_last | bool
+
+- name: (hp linux tools) extract {{ hplt_hpuefi_mod_tgz_file }}
   unarchive:
-    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpuefi_name }}"
+    src: "{{ hplt_hpuefi_mod_tgz_path }}/{{ hplt_hpuefi_mod_tgz_file }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
     owner: "{{ hplt_file_owner }}"
     group: root
@@ -41,9 +108,9 @@
   become: yes
   when: hplt_file_extract | bool
 
-- name: (hp linux tools) extract {{ hplt_hpflash_name }}
+- name: (hp linux tools) extract {{ hplt_hp_flash_tgz_file }}
   unarchive:
-    src: "{{ hplt_dir }}/{{ hplt_distro_dir }}/{{ hplt_hpflash_name }}"
+    src: "{{ hplt_hp_flash_tgz_path }}/{{ hplt_hp_flash_tgz_file }}"
     dest: "{{ hplt_dir }}/{{ hplt_distro_dir }}"
     owner: "{{ hplt_file_owner }}"
     group: root
@@ -51,3 +118,37 @@
     remote_src: yes
   become: yes
   when: hplt_file_extract | bool
+
+- name: find most recent hp-repsetup bin
+  shell: |
+    set -o pipefail;
+    TMP=$(mktemp);
+    find {{ hplt_dir }} -iname '{{ hplt_repsetup_bin }}' > "$TMP" &&
+    FILE=$(cat "$TMP" | xargs -n1 basename | sort -Vr | head -1);
+    echo "$FILE" "$(grep -w "$FILE" "$TMP" | sort -Vr | head -1 | xargs -n1 dirname)"
+  register: hplt_hp_repsetup_bin_register
+  become: true
+  when:
+    - hplt_repsetup_bin is defined
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool
+
+- name: set most recent hp-repsetup bin file and path
+  set_fact:
+    hplt_hp_repsetup_bin_file: "{{ hplt_hp_repsetup_bin_register.stdout | split(' ') | first }}"
+    hplt_hp_repsetup_bin_path: "{{ hplt_hp_repsetup_bin_register.stdout | split(' ') | last }}"
+  when:
+    - hplt_hp_repsetup_bin_register is defined
+    - hplt_hp_repsetup_bin_register.failed is defined
+    - not hplt_hp_repsetup_bin_register.failed | bool
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool
+
+- name: set hp-repsetup command bin
+  set_fact:
+    hplt_repsetup_command_bin: "{{ hplt_hp_repsetup_bin_path }}/{{ hplt_hp_repsetup_bin_file }}"
+  when:
+    - hplt_hp_repsetup_bin_path is defined
+    - hplt_hp_repsetup_bin_file is defined
+    - hplt_hp_repsetup_bin_find_last is defined
+    - hplt_hp_repsetup_bin_find_last | bool

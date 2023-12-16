@@ -7,9 +7,12 @@ hplt_dmi_system_vendor: true
 hplt_dmi_tasks: true
 hplt_dmi_valid_product_bios_date:
   - 04/27/2020
+  - 11/04/2021
 hplt_dmi_valid_product_bios_version:
   - R23 Ver. 02.05.01
+  - S23 Ver. 02.09.02
 hplt_dmi_valid_product_name:
   - HP ProDesk 400 G5 Desktop Mini
+  - HP ProDesk 400 G6 Desktop Mini PC
 hplt_dmi_valid_system_vendor:
   - HP
